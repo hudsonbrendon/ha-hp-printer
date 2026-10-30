@@ -1,0 +1,431 @@
+{
+  "title": "HP Printer",
+  "config": {
+    "flow_title": "{name} ({host})",
+    "step": {
+      "user": {
+        "title": "Connect to your HP printer",
+        "description": "Status, supplies and scanning work without a password. The EWS admin password (user admin, often the PIN printed inside the cartridge door) unlocks settings such as sleep timeout and network services.",
+        "data": {
+          "host": "Host",
+          "password": "Admin password"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the printer on your network.",
+          "password": "Optional. Needed only to change printer settings."
+        }
+      },
+      "discovery_confirm": {
+        "title": "HP printer found",
+        "description": "Add {name} at {host}? You can enter the EWS admin password now or later from Reconfigure.",
+        "data": {
+          "password": "Admin password"
+        },
+        "data_description": {
+          "password": "Optional. Needed only to change printer settings."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update the admin password",
+        "description": "{name} rejected the stored admin password. Enter the current one (leave empty to stop writing settings).",
+        "data": {
+          "password": "Admin password"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure the printer",
+        "data": {
+          "host": "Host",
+          "password": "Admin password"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the printer on your network.",
+          "password": "Optional. Needed only to change printer settings."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "not_supported": "The device answered but does not speak HP LEDM or CDM. Is it an HP printer?",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Device is already configured",
+      "already_in_progress": "Configuration flow is already in progress",
+      "reauth_successful": "Re-authentication was successful",
+      "reconfigure_successful": "Re-configuration was successful",
+      "wrong_device": "That address belongs to a different printer.",
+      "cannot_connect": "Failed to connect",
+      "not_supported": "The device does not speak HP LEDM or CDM.",
+      "unknown": "Unexpected error"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HP printer options",
+        "data": {
+          "scan_interval": "Polling interval",
+          "scan_resolution": "Default scan resolution",
+          "scan_color_mode": "Default scan color mode",
+          "scan_format": "Default scan format",
+          "scan_source": "Default scan source",
+          "scan_directory": "Scan directory"
+        },
+        "data_description": {
+          "scan_interval": "Seconds between status polls. Counters and configuration are refreshed every 10 polls.",
+          "scan_directory": "Leave empty to save scans under media/hp_printer/<serial>."
+        }
+      }
+    }
+  },
+  "selector": {
+    "scan_color_mode": {
+      "options": {
+        "RGB24": "Color",
+        "Grayscale8": "Grayscale",
+        "BlackAndWhite1": "Black and white"
+      }
+    },
+    "scan_format": {
+      "options": {
+        "application/pdf": "PDF",
+        "image/jpeg": "JPEG"
+      }
+    },
+    "scan_source": {
+      "options": {
+        "Platen": "Flatbed glass",
+        "Feeder": "Document feeder (ADF)"
+      }
+    },
+    "report_page": {
+      "options": {
+        "configurationPage": "Printer status report",
+        "networkSummary": "Network configuration page",
+        "networkDiagnosticPage": "Network diagnostics",
+        "wirelessNetworkPage": "Wireless test report",
+        "pqDiagnosticsPage": "Print quality diagnostic",
+        "diagnosticsPage": "Diagnostics page",
+        "extendedConfigurationPage": "Extended configuration",
+        "eventLogReport": "Event log",
+        "webAccessReport": "Web access report",
+        "webServicesInfoPage": "Web services info",
+        "ePrintSetupPage": "ePrint setup page",
+        "wifiDirectGuide": "Wi-Fi Direct guide",
+        "cleaningPage": "Clean cartridges",
+        "cleaningPageLevel2": "Clean cartridges (level 2)",
+        "cleaningVerificationPage": "Cleaning verification",
+        "paperFeedCleaningPage": "Paper feed cleaning",
+        "ribSmearCleaningPage": "Smear cleaning"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "idle": "Idle",
+          "printing": "Printing",
+          "scanning": "Scanning",
+          "copying": "Copying",
+          "canceling": "Canceling",
+          "initializing": "Initializing",
+          "calibrating": "Calibrating",
+          "shutting_down": "Shutting down",
+          "sleeping": "Sleeping",
+          "attention": "Attention",
+          "error": "Error",
+          "unknown": "Unknown"
+        },
+        "state_attributes": {
+          "categories": { "name": "Status categories" },
+          "problems": { "name": "Problems" },
+          "alerts": { "name": "Alerts" },
+          "ipp_state": { "name": "IPP state" },
+          "ipp_state_reasons": { "name": "IPP state reasons" },
+          "scanner_state": { "name": "Scanner state" }
+        }
+      },
+      "total_pages": { "name": "Total pages" },
+      "monochrome_pages": { "name": "Monochrome pages" },
+      "color_pages": { "name": "Color pages" },
+      "duplex_sheets": { "name": "Duplex sheets" },
+      "scan_pages": { "name": "Scanned pages" },
+      "copy_pages": { "name": "Copied pages" },
+      "fax_pages": { "name": "Fax pages" },
+      "jam_events": { "name": "Paper jams" },
+      "mispick_events": { "name": "Paper mispicks" },
+      "cancel_presses": { "name": "Cancel button presses" },
+      "ink_used": { "name": "Ink used" },
+      "quiet_mode_pages": { "name": "Quiet mode pages" },
+      "wifi_rssi": { "name": "Wi-Fi signal" },
+      "wifi_signal": { "name": "Wi-Fi bars" },
+      "wifi_ssid": { "name": "Wi-Fi network" },
+      "ip_address": { "name": "IP address" },
+      "uptime": { "name": "Last boot" },
+      "firmware_update_status": { "name": "Firmware update status" },
+      "paper_size": { "name": "Paper size" },
+      "paper_type": { "name": "Paper type" },
+      "scanner_state": {
+        "name": "Scanner",
+        "state": {
+          "idle": "Idle",
+          "processing": "Scanning",
+          "testing": "Warming up",
+          "stopped": "Stopped",
+          "down": "Down"
+        }
+      },
+      "current_job": { "name": "Current job" },
+      "last_job": { "name": "Last job" },
+      "queued_jobs": { "name": "Queued jobs" },
+      "calibration_state": { "name": "Alignment state" },
+      "eprint_status": { "name": "HP web services" },
+      "last_error_code": { "name": "Last event code" },
+      "last_scan": { "name": "Last scan" },
+      "consumable_level": { "name": "{color} ink" },
+      "consumable_raw_level": { "name": "{color} ink raw level" },
+      "consumable_state": { "name": "{color} cartridge state" },
+      "consumable_pages_remaining": { "name": "{color} pages remaining" }
+    },
+    "binary_sensor": {
+      "problem": { "name": "Problem" },
+      "attention": { "name": "Attention" },
+      "printing": { "name": "Printing" },
+      "scanning": { "name": "Scanning" },
+      "sleeping": { "name": "Sleeping" },
+      "low_ink": { "name": "Low ink" },
+      "paper_loaded": { "name": "Paper loaded" },
+      "firmware_update_available": { "name": "Firmware update available" },
+      "wifi_connected": { "name": "Wi-Fi connected" },
+      "eprint_registered": { "name": "HP web services registered" },
+      "accepting_jobs": { "name": "Accepting jobs" },
+      "calibration_required": { "name": "Alignment required" }
+    },
+    "switch": {
+      "quiet_mode": { "name": "Quiet mode" },
+      "firmware_auto_check": { "name": "Automatic firmware check" },
+      "firmware_auto_update": { "name": "Automatic firmware update" },
+      "power_save": { "name": "Power save" },
+      "ews": { "name": "Embedded web server" },
+      "airprint": { "name": "AirPrint" },
+      "ipps": { "name": "IPPS" },
+      "bluetooth": { "name": "Bluetooth" },
+      "remote_scans": { "name": "Remote scans" },
+      "wifi_direct_show_passphrase": { "name": "Wi-Fi Direct show passphrase" },
+      "wifi_direct_hide_ssid": { "name": "Wi-Fi Direct hide SSID" },
+      "ipp": { "name": "IPP" },
+      "port9100": { "name": "Port 9100 printing" },
+      "snmp": { "name": "SNMP" },
+      "mdns": { "name": "Bonjour (mDNS)" },
+      "ws_discovery": { "name": "WS-Discovery" },
+      "ws_print": { "name": "WS-Print" },
+      "ws_scan": { "name": "WS-Scan" },
+      "llmnr": { "name": "LLMNR" },
+      "webscan": { "name": "Webscan" }
+    },
+    "select": {
+      "power_save_timeout": {
+        "name": "Sleep after",
+        "state": {
+          "1minutes": "1 minute",
+          "5minutes": "5 minutes",
+          "10minutes": "10 minutes",
+          "15minutes": "15 minutes",
+          "30minutes": "30 minutes",
+          "60minutes": "1 hour"
+        }
+      },
+      "auto_off_time": {
+        "name": "Auto-off after",
+        "state": {
+          "never": "Never",
+          "15minutes": "15 minutes",
+          "30minutes": "30 minutes",
+          "1hours": "1 hour",
+          "2hours": "2 hours",
+          "4hours": "4 hours",
+          "8hours": "8 hours"
+        }
+      },
+      "device_language": { "name": "Panel language" },
+      "time_format": {
+        "name": "Time format",
+        "state": { "HR12": "12 hours", "HR24": "24 hours" }
+      },
+      "date_format": {
+        "name": "Date format",
+        "state": {
+          "MMMDDYYYY": "Month day year",
+          "DDMMMYYYY": "Day month year",
+          "YYYYMMMDD": "Year month day"
+        }
+      },
+      "print_quality": {
+        "name": "Default print quality",
+        "state": { "Draft": "Draft", "Normal": "Normal", "Best": "Best" }
+      },
+      "print_resolution": {
+        "name": "Default print resolution",
+        "state": {
+          "fast300dpi": "300 dpi",
+          "fast600dpi": "600 dpi",
+          "fast1200dpi": "1200 dpi"
+        }
+      },
+      "copy_quality": {
+        "name": "Default copy quality",
+        "state": { "draft": "Draft", "normal": "Normal", "best": "Best" }
+      },
+      "copy_output_type": {
+        "name": "Default copy color",
+        "state": { "monochrome": "Black and white", "color": "Color" }
+      },
+      "copy_media_size": { "name": "Default copy paper size" },
+      "scan_resolution": { "name": "Scan resolution" },
+      "scan_color_mode": {
+        "name": "Scan color mode",
+        "state": {
+          "RGB24": "Color",
+          "Grayscale8": "Grayscale",
+          "BlackAndWhite1": "Black and white"
+        }
+      },
+      "scan_format": {
+        "name": "Scan format",
+        "state": { "application/pdf": "PDF", "image/jpeg": "JPEG" }
+      },
+      "scan_source": {
+        "name": "Scan source",
+        "state": { "Platen": "Flatbed glass", "Feeder": "Document feeder" }
+      }
+    },
+    "number": {
+      "print_copies": { "name": "Default copies" },
+      "job_timeout": { "name": "Job timeout" },
+      "copy_copies": { "name": "Default copy count" },
+      "copy_lighter_darker": { "name": "Copy darkness" }
+    },
+    "button": {
+      "identify": { "name": "Locate" },
+      "scan": { "name": "Scan" },
+      "cancel_job": { "name": "Cancel current job" },
+      "check_firmware": { "name": "Check for firmware update" },
+      "clean_cartridges": { "name": "Clean cartridges" },
+      "align_cartridges": { "name": "Align cartridges" },
+      "check_internet": { "name": "Check internet connection" },
+      "restart": { "name": "Restart" },
+      "print_configuration_page": { "name": "Print status report" },
+      "print_network_summary": { "name": "Print network summary" },
+      "print_quality_report": { "name": "Print quality diagnostic" },
+      "print_wireless_test": { "name": "Print wireless test report" }
+    },
+    "update": {
+      "firmware": { "name": "Firmware" }
+    },
+    "image": {
+      "last_scan": { "name": "Last scan" }
+    },
+    "text": {
+      "location": { "name": "Location" },
+      "description": { "name": "Description" }
+    },
+    "event": {
+      "events": {
+        "name": "Events",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "alert_table_changed": "Alerts changed",
+              "job_event": "Job event",
+              "power_up": "Powered on",
+              "powering_down": "Powering down",
+              "scan_event": "Scan event",
+              "consumable_event": "Cartridge event",
+              "device_capabilities_changed": "Capabilities changed",
+              "oobe_status_changed": "Setup status changed",
+              "scan_completed": "Scan completed",
+              "print_job_started": "Print job started",
+              "print_job_completed": "Print job completed"
+            }
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "scan": {
+      "name": "Scan",
+      "description": "Scans a document and saves it to the media folder. Returns the file path.",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer to scan with." },
+        "resolution": { "name": "Resolution", "description": "Resolution in dpi. Defaults to the configured scan resolution." },
+        "color_mode": { "name": "Color mode", "description": "Color, grayscale or black and white." },
+        "format": { "name": "Format", "description": "PDF or JPEG." },
+        "source": { "name": "Source", "description": "Flatbed glass or document feeder." },
+        "filename": { "name": "File name", "description": "Base name of the file (without extension). Defaults to a timestamp." }
+      }
+    },
+    "print_file": {
+      "name": "Print file",
+      "description": "Prints a file from an allowed directory over IPP. JPEG works on every HP printer; PDF only on printers that list it as a supported format.",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer to print on." },
+        "path": { "name": "Path", "description": "Absolute path of the file (must be inside allowlist_external_dirs or the media folder)." },
+        "format": { "name": "Document format", "description": "MIME type. Guessed from the extension when omitted." },
+        "copies": { "name": "Copies", "description": "Number of copies." }
+      }
+    },
+    "print_report": {
+      "name": "Print report",
+      "description": "Prints one of the printer's built-in pages (status report, network summary, print quality diagnostic...) or runs a cleaning page.",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer." },
+        "page": { "name": "Page", "description": "Which internal page to print." }
+      }
+    },
+    "identify": {
+      "name": "Locate printer",
+      "description": "Flashes the printer's display so you can find it.",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer." }
+      }
+    },
+    "cancel_job": {
+      "name": "Cancel job",
+      "description": "Cancels a print job (the current one when no id is given).",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer." },
+        "job_id": { "name": "Job id", "description": "IPP job id. Omit to cancel the job being printed." }
+      }
+    },
+    "clean_cartridges": {
+      "name": "Clean cartridges",
+      "description": "Runs the cartridge cleaning routine (prints a page).",
+      "fields": {
+        "device_id": { "name": "Printer", "description": "The HP printer." },
+        "level": { "name": "Level", "description": "1 = light, 3 = deep cleaning." }
+      }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": { "message": "Could not reach the printer at {host}: {error}" },
+    "not_supported": { "message": "The device at {host} does not speak HP LEDM or CDM." },
+    "update_failed": { "message": "Updating printer data failed: {error}" },
+    "password_required": { "message": "This setting needs the printer admin password. Add it under Reconfigure." },
+    "invalid_auth": { "message": "The printer rejected the admin password." },
+    "not_supported_action": { "message": "This printer does not support that action: {error}" },
+    "communication_error": { "message": "Communication with the printer failed: {error}" },
+    "scan_failed": { "message": "Scan failed: {error}" },
+    "scan_in_progress": { "message": "A scan is already in progress." },
+    "no_active_job": { "message": "There is no active print job to cancel." },
+    "device_not_found": { "message": "No HP printer with device id {device_id}." },
+    "entry_not_loaded": { "message": "The HP printer {device_id} is not loaded." },
+    "no_scanner": { "message": "This printer has no scanner." },
+    "path_not_allowed": { "message": "{path} is not inside an allowed directory." },
+    "file_not_found": { "message": "{path} does not exist." }
+  }
+}

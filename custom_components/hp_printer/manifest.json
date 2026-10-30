@@ -1,0 +1,36 @@
+{
+  "domain": "hp_printer",
+  "name": "HP Printer",
+  "codeowners": ["@hudsonbrendon"],
+  "config_flow": true,
+  "dependencies": [],
+  "dhcp": [
+    { "registered_devices": true },
+    { "hostname": "hp*", "macaddress": "5C60BA*" },
+    { "hostname": "hp*", "macaddress": "3CD92B*" },
+    { "hostname": "hp*", "macaddress": "30E171*" },
+    { "hostname": "hp*", "macaddress": "80CE62*" },
+    { "hostname": "hp*", "macaddress": "A0D3C1*" },
+    { "hostname": "hp*", "macaddress": "9CB654*" },
+    { "hostname": "hp*", "macaddress": "F430B9*" },
+    { "hostname": "hp*", "macaddress": "48BA4E*" },
+    { "hostname": "hp*", "macaddress": "10E7C6*" },
+    { "hostname": "npi*", "macaddress": "3CD92B*" },
+    { "hostname": "npi*", "macaddress": "30E171*" },
+    { "hostname": "npi*", "macaddress": "80CE62*" },
+    { "hostname": "npi*", "macaddress": "A0D3C1*" }
+  ],
+  "documentation": "https://github.com/hudsonbrendon/ha-hp-printer",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/hudsonbrendon/ha-hp-printer/issues",
+  "loggers": ["hp_printer", "pyipp"],
+  "requirements": ["python-hp-printer==0.1.0"],
+  "version": "0.1.0",
+  "zeroconf": [
+    { "type": "_ipp._tcp.local.", "properties": { "usb_mfg": "hp*" } },
+    { "type": "_ipps._tcp.local.", "properties": { "usb_mfg": "hp*" } },
+    { "type": "_uscan._tcp.local.", "properties": { "ty": "hp*" } },
+    { "type": "_printer._tcp.local.", "properties": { "usb_mfg": "hp*" } }
+  ]
+}

@@ -1,0 +1,138 @@
+scan:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+    resolution:
+      example: 300
+      selector:
+        number:
+          min: 75
+          max: 2400
+          step: 25
+          unit_of_measurement: dpi
+          mode: box
+    color_mode:
+      example: RGB24
+      selector:
+        select:
+          translation_key: scan_color_mode
+          options:
+            - RGB24
+            - Grayscale8
+            - BlackAndWhite1
+    format:
+      example: application/pdf
+      selector:
+        select:
+          translation_key: scan_format
+          options:
+            - application/pdf
+            - image/jpeg
+    source:
+      example: Platen
+      selector:
+        select:
+          translation_key: scan_source
+          options:
+            - Platen
+            - Feeder
+    filename:
+      example: contract
+      selector:
+        text:
+
+print_file:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+    path:
+      required: true
+      example: /media/documents/ticket.pdf
+      selector:
+        text:
+    format:
+      example: application/pdf
+      selector:
+        text:
+    copies:
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 99
+          mode: box
+
+print_report:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+    page:
+      required: true
+      example: networkSummary
+      selector:
+        select:
+          translation_key: report_page
+          options:
+            - configurationPage
+            - networkSummary
+            - networkDiagnosticPage
+            - wirelessNetworkPage
+            - pqDiagnosticsPage
+            - diagnosticsPage
+            - extendedConfigurationPage
+            - eventLogReport
+            - webAccessReport
+            - webServicesInfoPage
+            - ePrintSetupPage
+            - wifiDirectGuide
+            - cleaningPage
+            - cleaningPageLevel2
+            - cleaningVerificationPage
+            - paperFeedCleaningPage
+            - ribSmearCleaningPage
+
+identify:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+
+cancel_job:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+    job_id:
+      example: 42
+      selector:
+        number:
+          min: 1
+          mode: box
+
+clean_cartridges:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: hp_printer
+    level:
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 3
+          mode: slider
