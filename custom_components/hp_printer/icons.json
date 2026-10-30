@@ -18,18 +18,42 @@
           "unknown": "mdi:printer-off"
         }
       },
-      "total_pages": { "default": "mdi:file-document-multiple" },
-      "monochrome_pages": { "default": "mdi:file-document-outline" },
-      "color_pages": { "default": "mdi:file-image" },
-      "duplex_sheets": { "default": "mdi:file-document-multiple-outline" },
-      "scan_pages": { "default": "mdi:scanner" },
-      "copy_pages": { "default": "mdi:content-copy" },
-      "fax_pages": { "default": "mdi:fax" },
-      "jam_events": { "default": "mdi:file-alert" },
-      "mispick_events": { "default": "mdi:file-remove" },
-      "cancel_presses": { "default": "mdi:gesture-tap-button" },
-      "ink_used": { "default": "mdi:water" },
-      "quiet_mode_pages": { "default": "mdi:volume-low" },
+      "total_pages": {
+        "default": "mdi:file-document-multiple"
+      },
+      "monochrome_pages": {
+        "default": "mdi:file-document-outline"
+      },
+      "color_pages": {
+        "default": "mdi:file-image"
+      },
+      "duplex_sheets": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "scan_pages": {
+        "default": "mdi:scanner"
+      },
+      "copy_pages": {
+        "default": "mdi:content-copy"
+      },
+      "fax_pages": {
+        "default": "mdi:fax"
+      },
+      "jam_events": {
+        "default": "mdi:file-alert"
+      },
+      "mispick_events": {
+        "default": "mdi:file-remove"
+      },
+      "cancel_presses": {
+        "default": "mdi:gesture-tap-button"
+      },
+      "ink_used": {
+        "default": "mdi:water"
+      },
+      "quiet_mode_pages": {
+        "default": "mdi:volume-low"
+      },
       "wifi_signal": {
         "default": "mdi:wifi",
         "range": {
@@ -41,11 +65,21 @@
           "5": "mdi:wifi-strength-4"
         }
       },
-      "wifi_ssid": { "default": "mdi:wifi" },
-      "ip_address": { "default": "mdi:ip-network" },
-      "firmware_update_status": { "default": "mdi:update" },
-      "paper_size": { "default": "mdi:note-outline" },
-      "paper_type": { "default": "mdi:paper-roll-outline" },
+      "wifi_ssid": {
+        "default": "mdi:wifi"
+      },
+      "ip_address": {
+        "default": "mdi:ip-network"
+      },
+      "firmware_update_status": {
+        "default": "mdi:update"
+      },
+      "paper_size": {
+        "default": "mdi:note-outline"
+      },
+      "paper_type": {
+        "default": "mdi:paper-roll-outline"
+      },
       "scanner_state": {
         "default": "mdi:scanner",
         "state": {
@@ -56,13 +90,27 @@
           "down": "mdi:scanner-off"
         }
       },
-      "current_job": { "default": "mdi:file-clock" },
-      "last_job": { "default": "mdi:file-check" },
-      "queued_jobs": { "default": "mdi:tray-full" },
-      "calibration_state": { "default": "mdi:format-align-middle" },
-      "eprint_status": { "default": "mdi:cloud-print" },
-      "last_error_code": { "default": "mdi:alert-circle-outline" },
-      "last_scan": { "default": "mdi:clock-check-outline" },
+      "current_job": {
+        "default": "mdi:file-clock"
+      },
+      "last_job": {
+        "default": "mdi:file-check"
+      },
+      "queued_jobs": {
+        "default": "mdi:tray-full"
+      },
+      "calibration_state": {
+        "default": "mdi:format-align-middle"
+      },
+      "eprint_status": {
+        "default": "mdi:cloud-print"
+      },
+      "last_error_code": {
+        "default": "mdi:alert-circle-outline"
+      },
+      "last_scan": {
+        "default": "mdi:clock-check-outline"
+      },
       "consumable_level": {
         "default": "mdi:water",
         "range": {
@@ -73,110 +121,404 @@
           "90": "mdi:water-plus"
         }
       },
-      "consumable_raw_level": { "default": "mdi:water-percent" },
-      "consumable_state": { "default": "mdi:printer-3d-nozzle" },
-      "consumable_pages_remaining": { "default": "mdi:file-document-multiple-outline" }
+      "consumable_raw_level": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_black": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_black": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_black": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_black": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_tri_color": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_tri_color": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_tri_color": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_tri_color": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_cyan": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_cyan": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_cyan": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_cyan": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_magenta": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_magenta": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_magenta": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_magenta": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_yellow": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_yellow": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_yellow": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_yellow": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_photo_black": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_photo_black": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_photo_black": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_photo_black": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_matte_black": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_matte_black": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_matte_black": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_matte_black": {
+        "default": "mdi:file-document-multiple-outline"
+      },
+      "consumable_level_gray": {
+        "default": "mdi:water",
+        "range": {
+          "0": "mdi:water-off",
+          "1": "mdi:water-alert",
+          "15": "mdi:water-minus",
+          "50": "mdi:water",
+          "90": "mdi:water-plus"
+        }
+      },
+      "consumable_raw_level_gray": {
+        "default": "mdi:water-percent"
+      },
+      "consumable_state_gray": {
+        "default": "mdi:printer-3d-nozzle"
+      },
+      "consumable_pages_remaining_gray": {
+        "default": "mdi:file-document-multiple-outline"
+      }
     },
     "binary_sensor": {
       "printing": {
         "default": "mdi:printer",
-        "state": { "on": "mdi:printer-pos", "off": "mdi:printer" }
+        "state": {
+          "on": "mdi:printer-pos",
+          "off": "mdi:printer"
+        }
       },
       "scanning": {
         "default": "mdi:scanner",
-        "state": { "on": "mdi:scanner", "off": "mdi:scanner-off" }
+        "state": {
+          "on": "mdi:scanner",
+          "off": "mdi:scanner-off"
+        }
       },
       "sleeping": {
         "default": "mdi:sleep-off",
-        "state": { "on": "mdi:sleep", "off": "mdi:sleep-off" }
+        "state": {
+          "on": "mdi:sleep",
+          "off": "mdi:sleep-off"
+        }
       },
       "low_ink": {
         "default": "mdi:water-check",
-        "state": { "on": "mdi:water-alert", "off": "mdi:water-check" }
+        "state": {
+          "on": "mdi:water-alert",
+          "off": "mdi:water-check"
+        }
       },
       "paper_loaded": {
         "default": "mdi:tray",
-        "state": { "on": "mdi:tray-full", "off": "mdi:tray-remove" }
+        "state": {
+          "on": "mdi:tray-full",
+          "off": "mdi:tray-remove"
+        }
       },
-      "eprint_registered": { "default": "mdi:cloud-print" },
-      "accepting_jobs": { "default": "mdi:tray-arrow-down" },
-      "calibration_required": { "default": "mdi:format-align-middle" }
+      "eprint_registered": {
+        "default": "mdi:cloud-print"
+      },
+      "accepting_jobs": {
+        "default": "mdi:tray-arrow-down"
+      },
+      "calibration_required": {
+        "default": "mdi:format-align-middle"
+      }
     },
     "switch": {
       "quiet_mode": {
         "default": "mdi:volume-low",
-        "state": { "on": "mdi:volume-low", "off": "mdi:volume-high" }
+        "state": {
+          "on": "mdi:volume-low",
+          "off": "mdi:volume-high"
+        }
       },
-      "firmware_auto_check": { "default": "mdi:update" },
-      "firmware_auto_update": { "default": "mdi:cloud-download" },
-      "power_save": { "default": "mdi:power-sleep" },
-      "ews": { "default": "mdi:web" },
-      "airprint": { "default": "mdi:apple" },
-      "ipps": { "default": "mdi:lock" },
-      "bluetooth": { "default": "mdi:bluetooth" },
-      "remote_scans": { "default": "mdi:scanner" },
-      "wifi_direct_show_passphrase": { "default": "mdi:eye" },
-      "wifi_direct_hide_ssid": { "default": "mdi:wifi-off" },
-      "ipp": { "default": "mdi:printer-wireless" },
-      "port9100": { "default": "mdi:ethernet" },
-      "snmp": { "default": "mdi:lan" },
-      "mdns": { "default": "mdi:dns" },
-      "ws_discovery": { "default": "mdi:magnify-scan" },
-      "ws_print": { "default": "mdi:microsoft-windows" },
-      "ws_scan": { "default": "mdi:microsoft-windows" },
-      "llmnr": { "default": "mdi:dns-outline" },
-      "webscan": { "default": "mdi:web" }
+      "firmware_auto_check": {
+        "default": "mdi:update"
+      },
+      "firmware_auto_update": {
+        "default": "mdi:cloud-download"
+      },
+      "power_save": {
+        "default": "mdi:power-sleep"
+      },
+      "ews": {
+        "default": "mdi:web"
+      },
+      "airprint": {
+        "default": "mdi:apple"
+      },
+      "ipps": {
+        "default": "mdi:lock"
+      },
+      "bluetooth": {
+        "default": "mdi:bluetooth"
+      },
+      "remote_scans": {
+        "default": "mdi:scanner"
+      },
+      "wifi_direct_show_passphrase": {
+        "default": "mdi:eye"
+      },
+      "wifi_direct_hide_ssid": {
+        "default": "mdi:wifi-off"
+      },
+      "ipp": {
+        "default": "mdi:printer-wireless"
+      },
+      "port9100": {
+        "default": "mdi:ethernet"
+      },
+      "snmp": {
+        "default": "mdi:lan"
+      },
+      "mdns": {
+        "default": "mdi:dns"
+      },
+      "ws_discovery": {
+        "default": "mdi:magnify-scan"
+      },
+      "ws_print": {
+        "default": "mdi:microsoft-windows"
+      },
+      "ws_scan": {
+        "default": "mdi:microsoft-windows"
+      },
+      "llmnr": {
+        "default": "mdi:dns-outline"
+      },
+      "webscan": {
+        "default": "mdi:web"
+      }
     },
     "select": {
-      "power_save_timeout": { "default": "mdi:timer-sand" },
-      "auto_off_time": { "default": "mdi:power-settings" },
-      "device_language": { "default": "mdi:translate" },
-      "time_format": { "default": "mdi:clock-outline" },
-      "date_format": { "default": "mdi:calendar" },
-      "print_quality": { "default": "mdi:quality-high" },
-      "print_resolution": { "default": "mdi:dots-grid" },
-      "copy_quality": { "default": "mdi:quality-medium" },
-      "copy_output_type": { "default": "mdi:palette" },
-      "copy_media_size": { "default": "mdi:note-outline" },
-      "scan_resolution": { "default": "mdi:dots-grid" },
-      "scan_color_mode": { "default": "mdi:palette" },
-      "scan_format": { "default": "mdi:file-pdf-box" },
-      "scan_source": { "default": "mdi:tray-arrow-up" }
+      "power_save_timeout": {
+        "default": "mdi:timer-sand"
+      },
+      "auto_off_time": {
+        "default": "mdi:power-settings"
+      },
+      "device_language": {
+        "default": "mdi:translate"
+      },
+      "time_format": {
+        "default": "mdi:clock-outline"
+      },
+      "date_format": {
+        "default": "mdi:calendar"
+      },
+      "print_quality": {
+        "default": "mdi:quality-high"
+      },
+      "print_resolution": {
+        "default": "mdi:dots-grid"
+      },
+      "copy_quality": {
+        "default": "mdi:quality-medium"
+      },
+      "copy_output_type": {
+        "default": "mdi:palette"
+      },
+      "copy_media_size": {
+        "default": "mdi:note-outline"
+      },
+      "scan_resolution": {
+        "default": "mdi:dots-grid"
+      },
+      "scan_color_mode": {
+        "default": "mdi:palette"
+      },
+      "scan_format": {
+        "default": "mdi:file-pdf-box"
+      },
+      "scan_source": {
+        "default": "mdi:tray-arrow-up"
+      }
     },
     "number": {
-      "print_copies": { "default": "mdi:counter" },
-      "job_timeout": { "default": "mdi:timer-outline" },
-      "copy_copies": { "default": "mdi:content-copy" },
-      "copy_lighter_darker": { "default": "mdi:brightness-6" }
+      "print_copies": {
+        "default": "mdi:counter"
+      },
+      "job_timeout": {
+        "default": "mdi:timer-outline"
+      },
+      "copy_copies": {
+        "default": "mdi:content-copy"
+      },
+      "copy_lighter_darker": {
+        "default": "mdi:brightness-6"
+      }
     },
     "button": {
-      "scan": { "default": "mdi:scanner" },
-      "cancel_job": { "default": "mdi:cancel" },
-      "clean_cartridges": { "default": "mdi:spray-bottle" },
-      "align_cartridges": { "default": "mdi:format-align-middle" },
-      "check_internet": { "default": "mdi:web-check" },
-      "print_configuration_page": { "default": "mdi:file-document" },
-      "print_network_summary": { "default": "mdi:lan" },
-      "print_quality_report": { "default": "mdi:quality-high" },
-      "print_wireless_test": { "default": "mdi:wifi-check" }
+      "scan": {
+        "default": "mdi:scanner"
+      },
+      "cancel_job": {
+        "default": "mdi:cancel"
+      },
+      "clean_cartridges": {
+        "default": "mdi:spray-bottle"
+      },
+      "align_cartridges": {
+        "default": "mdi:format-align-middle"
+      },
+      "check_internet": {
+        "default": "mdi:web-check"
+      },
+      "print_configuration_page": {
+        "default": "mdi:file-document"
+      },
+      "print_network_summary": {
+        "default": "mdi:lan"
+      },
+      "print_quality_report": {
+        "default": "mdi:quality-high"
+      },
+      "print_wireless_test": {
+        "default": "mdi:wifi-check"
+      }
     },
     "image": {
-      "last_scan": { "default": "mdi:image" }
+      "last_scan": {
+        "default": "mdi:image"
+      }
     },
     "text": {
-      "location": { "default": "mdi:map-marker" },
-      "description": { "default": "mdi:text" }
+      "location": {
+        "default": "mdi:map-marker"
+      },
+      "description": {
+        "default": "mdi:text"
+      }
     },
     "event": {
-      "events": { "default": "mdi:printer-eye" }
+      "events": {
+        "default": "mdi:printer-eye"
+      }
     }
   },
   "services": {
-    "scan": { "service": "mdi:scanner" },
-    "print_file": { "service": "mdi:printer" },
-    "print_report": { "service": "mdi:file-document" },
-    "identify": { "service": "mdi:crosshairs-gps" },
-    "cancel_job": { "service": "mdi:cancel" },
-    "clean_cartridges": { "service": "mdi:spray-bottle" }
+    "scan": {
+      "service": "mdi:scanner"
+    },
+    "print_file": {
+      "service": "mdi:printer"
+    },
+    "print_report": {
+      "service": "mdi:file-document"
+    },
+    "identify": {
+      "service": "mdi:crosshairs-gps"
+    },
+    "cancel_job": {
+      "service": "mdi:cancel"
+    },
+    "clean_cartridges": {
+      "service": "mdi:spray-bottle"
+    }
   }
 }

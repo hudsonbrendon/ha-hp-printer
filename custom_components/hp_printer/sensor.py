@@ -33,6 +33,16 @@ from .entity import HPPrinterEntity
 PARALLEL_UPDATES = 0
 
 PAGES = "pages"
+KNOWN_COLORS = (
+    "black",
+    "tri_color",
+    "cyan",
+    "magenta",
+    "yellow",
+    "photo_black",
+    "matte_black",
+    "gray",
+)
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -497,8 +507,12 @@ class HPConsumableSensor(HPPrinterEntity, SensorEntity):
         """Bind to the cartridge by label code / station."""
         super().__init__(coordinator, description, consumable_slug(consumable))
         self._slug = consumable_slug(consumable)
-        color = (consumable.color or self._slug).replace("_", " ")
-        self._attr_translation_placeholders = {"color": color}
+        color = consumable.color or self._slug
+        if color in KNOWN_COLORS and description.translation_key:
+            # dedicated translation so the colour itself is localised
+            self._attr_translation_key = f"{description.translation_key}_{color}"
+        else:
+            self._attr_translation_placeholders = {"color": color.replace("_", " ")}
 
     def _consumable(self) -> Consumable | None:
         if not self.data.consumables:
