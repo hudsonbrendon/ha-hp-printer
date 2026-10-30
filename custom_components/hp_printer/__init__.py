@@ -34,6 +34,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: HPPrinterConfigEntry) ->
         session=async_get_clientsession(hass),
     )
     coordinator = HPPrinterCoordinator(hass, entry, client)
+    entry.async_on_unload(client.close)
     await coordinator.async_config_entry_first_refresh()
     entry.runtime_data = coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
