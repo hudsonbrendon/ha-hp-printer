@@ -105,7 +105,7 @@ automation:
           message: Scan ready
           data:
             attachment:
-              url: "/media/local/hp_printer/br28bcb23h/{{ trigger.to_state.attributes.path | basename }}"
+              url: "/media/local/hp_printer/<serial>/{{ trigger.to_state.attributes.path | basename }}"
 ```
 
 ## Known limitations
