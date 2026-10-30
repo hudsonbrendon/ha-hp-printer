@@ -193,7 +193,9 @@ def async_setup_services(hass: HomeAssistant) -> None:
 
     async def identify(call: ServiceCall) -> None:
         coordinator = _coordinator_for_device(hass, call.data[ATTR_DEVICE_ID])
-        await coordinator.async_write(lambda: coordinator.client.identify())
+        await coordinator.async_write(
+            lambda: coordinator.client.identify(), refresh=False
+        )
 
     async def cancel_job(call: ServiceCall) -> None:
         coordinator = _coordinator_for_device(hass, call.data[ATTR_DEVICE_ID])

@@ -48,7 +48,7 @@ BUTTONS: tuple[HPButtonDescription, ...] = (
         key="identify",
         translation_key="identify",
         device_class=ButtonDeviceClass.IDENTIFY,
-        press_fn=lambda c: c.async_write(lambda: c.client.identify()),
+        press_fn=lambda c: c.async_write(lambda: c.client.identify(), refresh=False),
         exists_fn=lambda d: d.capabilities.has_ipp,
     ),
     HPButtonDescription(

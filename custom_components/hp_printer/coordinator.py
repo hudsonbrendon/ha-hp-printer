@@ -226,7 +226,9 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
             return self.data.device.serial_number
         return self.config_entry.unique_id or self.config_entry.entry_id
 
-    async def async_write(self, action: Callable[[], Awaitable[Any]]) -> Any:
+    async def async_write(
+        self, action: Callable[[], Awaitable[Any]], *, refresh: bool = True
+    ) -> Any:
         """Run a write on the printer, translate errors and refresh afterwards."""
         try:
             result = await action()
@@ -251,9 +253,12 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
                 translation_key="communication_error",
                 translation_placeholders={"error": str(err)},
             ) from err
-        # the printer needs a moment before the new value shows up in reads
-        await asyncio.sleep(WRITE_SETTLE_SECONDS)
-        await self.async_request_refresh()
+        if refresh:
+            # the printer needs a moment before the new value shows up in reads;
+            # refresh directly (not debounced) so the entity state is current
+            # when the action call returns
+            await asyncio.sleep(WRITE_SETTLE_SECONDS)
+            await self.async_refresh()
         return result
 
     def scan_settings(self, **overrides: Any) -> ScanSettings:
