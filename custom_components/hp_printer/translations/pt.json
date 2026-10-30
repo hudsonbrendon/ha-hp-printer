@@ -1,0 +1,812 @@
+{
+  "title": "Impressora HP",
+  "config": {
+    "flow_title": "{name} ({host})",
+    "step": {
+      "user": {
+        "title": "Conectar à impressora HP",
+        "description": "Status, tintas e digitalização funcionam sem senha. A senha de administrador do EWS (usuário admin, geralmente o PIN impresso dentro da porta dos cartuchos) libera ajustes como tempo de suspensão e serviços de rede.",
+        "data": {
+          "host": "Endereço",
+          "password": "Senha de administrador"
+        },
+        "data_description": {
+          "host": "IP ou nome da impressora na rede.",
+          "password": "Opcional. Necessária só para alterar configurações da impressora."
+        }
+      },
+      "discovery_confirm": {
+        "title": "Impressora HP encontrada",
+        "description": "Adicionar {name} em {host}? Você pode informar a senha de administrador agora ou depois em Reconfigurar.",
+        "data": {
+          "password": "Senha de administrador"
+        },
+        "data_description": {
+          "password": "Opcional. Necessária só para alterar configurações da impressora."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Atualizar a senha de administrador",
+        "description": "{name} recusou a senha salva. Informe a senha atual (deixe em branco para parar de gravar configurações).",
+        "data": {
+          "password": "Senha de administrador"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigurar a impressora",
+        "data": {
+          "host": "Endereço",
+          "password": "Senha de administrador"
+        },
+        "data_description": {
+          "host": "IP ou nome da impressora na rede.",
+          "password": "Opcional. Necessária só para alterar configurações da impressora."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Falha ao conectar",
+      "invalid_auth": "Senha inválida",
+      "not_supported": "O dispositivo respondeu, mas não fala HP LEDM nem CDM. É uma impressora HP?",
+      "unknown": "Erro inesperado"
+    },
+    "abort": {
+      "already_configured": "Esta impressora já está configurada",
+      "already_in_progress": "Já existe uma configuração em andamento",
+      "reauth_successful": "Senha atualizada com sucesso",
+      "reconfigure_successful": "Reconfiguração concluída",
+      "wrong_device": "Esse endereço pertence a outra impressora.",
+      "cannot_connect": "Falha ao conectar",
+      "not_supported": "O dispositivo não fala HP LEDM nem CDM.",
+      "unknown": "Erro inesperado"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opções da impressora HP",
+        "data": {
+          "scan_interval": "Intervalo de atualização",
+          "scan_resolution": "Resolução padrão de digitalização",
+          "scan_color_mode": "Cor padrão de digitalização",
+          "scan_format": "Formato padrão de digitalização",
+          "scan_source": "Origem padrão de digitalização",
+          "scan_directory": "Pasta das digitalizações"
+        },
+        "data_description": {
+          "scan_interval": "Segundos entre as consultas de status. Contadores e configurações são atualizados a cada 10 consultas.",
+          "scan_directory": "Deixe em branco para salvar em media/hp_printer/<serial>."
+        }
+      }
+    }
+  },
+  "selector": {
+    "scan_color_mode": {
+      "options": {
+        "RGB24": "Colorido",
+        "Grayscale8": "Tons de cinza",
+        "BlackAndWhite1": "Preto e branco"
+      }
+    },
+    "scan_format": {
+      "options": {
+        "application/pdf": "PDF",
+        "image/jpeg": "JPEG"
+      }
+    },
+    "scan_source": {
+      "options": {
+        "Platen": "Vidro do scanner",
+        "Feeder": "Alimentador de documentos (ADF)"
+      }
+    },
+    "report_page": {
+      "options": {
+        "configurationPage": "Relatório de status da impressora",
+        "networkSummary": "Página de configuração de rede",
+        "networkDiagnosticPage": "Diagnóstico de rede",
+        "wirelessNetworkPage": "Relatório de teste da rede sem fio",
+        "pqDiagnosticsPage": "Diagnóstico de qualidade de impressão",
+        "diagnosticsPage": "Página de diagnóstico",
+        "extendedConfigurationPage": "Configuração estendida",
+        "eventLogReport": "Registro de eventos",
+        "webAccessReport": "Relatório de acesso web",
+        "webServicesInfoPage": "Informações dos serviços web",
+        "ePrintSetupPage": "Página de configuração do ePrint",
+        "wifiDirectGuide": "Guia do Wi-Fi Direct",
+        "cleaningPage": "Limpar cartuchos",
+        "cleaningPageLevel2": "Limpar cartuchos (nível 2)",
+        "cleaningVerificationPage": "Verificação da limpeza",
+        "paperFeedCleaningPage": "Limpeza da alimentação de papel",
+        "ribSmearCleaningPage": "Limpeza de manchas"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "idle": "Ociosa",
+          "printing": "Imprimindo",
+          "scanning": "Digitalizando",
+          "copying": "Copiando",
+          "canceling": "Cancelando",
+          "initializing": "Inicializando",
+          "calibrating": "Calibrando",
+          "shutting_down": "Desligando",
+          "sleeping": "Em suspensão",
+          "attention": "Atenção",
+          "error": "Erro",
+          "unknown": "Desconhecido"
+        },
+        "state_attributes": {
+          "categories": {
+            "name": "Categorias de status"
+          },
+          "problems": {
+            "name": "Problemas"
+          },
+          "alerts": {
+            "name": "Alertas"
+          },
+          "ipp_state": {
+            "name": "Estado IPP"
+          },
+          "ipp_state_reasons": {
+            "name": "Motivos do estado IPP"
+          },
+          "scanner_state": {
+            "name": "Estado do scanner"
+          }
+        }
+      },
+      "total_pages": {
+        "name": "Total de páginas"
+      },
+      "monochrome_pages": {
+        "name": "Páginas em preto"
+      },
+      "color_pages": {
+        "name": "Páginas coloridas"
+      },
+      "duplex_sheets": {
+        "name": "Folhas frente e verso"
+      },
+      "scan_pages": {
+        "name": "Páginas digitalizadas"
+      },
+      "copy_pages": {
+        "name": "Páginas copiadas"
+      },
+      "fax_pages": {
+        "name": "Páginas de fax"
+      },
+      "jam_events": {
+        "name": "Atolamentos de papel"
+      },
+      "mispick_events": {
+        "name": "Falhas de alimentação"
+      },
+      "cancel_presses": {
+        "name": "Toques no botão cancelar"
+      },
+      "ink_used": {
+        "name": "Tinta usada"
+      },
+      "quiet_mode_pages": {
+        "name": "Páginas em modo silencioso"
+      },
+      "wifi_rssi": {
+        "name": "Sinal Wi-Fi"
+      },
+      "wifi_signal": {
+        "name": "Barras de Wi-Fi"
+      },
+      "wifi_ssid": {
+        "name": "Rede Wi-Fi"
+      },
+      "ip_address": {
+        "name": "Endereço IP"
+      },
+      "uptime": {
+        "name": "Última inicialização"
+      },
+      "firmware_update_status": {
+        "name": "Status da atualização de firmware"
+      },
+      "paper_size": {
+        "name": "Tamanho do papel"
+      },
+      "paper_type": {
+        "name": "Tipo de papel"
+      },
+      "scanner_state": {
+        "name": "Scanner",
+        "state": {
+          "idle": "Ocioso",
+          "processing": "Digitalizando",
+          "testing": "Aquecendo",
+          "stopped": "Parado",
+          "down": "Indisponível"
+        }
+      },
+      "current_job": {
+        "name": "Trabalho atual"
+      },
+      "last_job": {
+        "name": "Último trabalho"
+      },
+      "queued_jobs": {
+        "name": "Trabalhos na fila"
+      },
+      "calibration_state": {
+        "name": "Estado do alinhamento"
+      },
+      "eprint_status": {
+        "name": "Serviços web HP"
+      },
+      "last_error_code": {
+        "name": "Último código de evento"
+      },
+      "last_scan": {
+        "name": "Última digitalização"
+      },
+      "consumable_level": {
+        "name": "Tinta {color}"
+      },
+      "consumable_raw_level": {
+        "name": "Nível bruto da tinta {color}"
+      },
+      "consumable_state": {
+        "name": "Estado do cartucho {color}"
+      },
+      "consumable_pages_remaining": {
+        "name": "Páginas restantes {color}"
+      },
+      "consumable_level_black": {
+        "name": "Tinta preta"
+      },
+      "consumable_level_tri_color": {
+        "name": "Tinta colorida"
+      },
+      "consumable_level_cyan": {
+        "name": "Tinta ciano"
+      },
+      "consumable_level_magenta": {
+        "name": "Tinta magenta"
+      },
+      "consumable_level_yellow": {
+        "name": "Tinta amarela"
+      },
+      "consumable_level_photo_black": {
+        "name": "Tinta preta fotográfica"
+      },
+      "consumable_level_matte_black": {
+        "name": "Tinta preta fosca"
+      },
+      "consumable_level_gray": {
+        "name": "Tinta cinza"
+      },
+      "consumable_raw_level_black": {
+        "name": "Nível bruto da tinta preta"
+      },
+      "consumable_raw_level_tri_color": {
+        "name": "Nível bruto da tinta colorida"
+      },
+      "consumable_raw_level_cyan": {
+        "name": "Nível bruto da tinta ciano"
+      },
+      "consumable_raw_level_magenta": {
+        "name": "Nível bruto da tinta magenta"
+      },
+      "consumable_raw_level_yellow": {
+        "name": "Nível bruto da tinta amarela"
+      },
+      "consumable_raw_level_photo_black": {
+        "name": "Nível bruto da tinta preta fotográfica"
+      },
+      "consumable_raw_level_matte_black": {
+        "name": "Nível bruto da tinta preta fosca"
+      },
+      "consumable_raw_level_gray": {
+        "name": "Nível bruto da tinta cinza"
+      },
+      "consumable_state_black": {
+        "name": "Estado do cartucho preto"
+      },
+      "consumable_state_tri_color": {
+        "name": "Estado do cartucho colorido"
+      },
+      "consumable_state_cyan": {
+        "name": "Estado do cartucho ciano"
+      },
+      "consumable_state_magenta": {
+        "name": "Estado do cartucho magenta"
+      },
+      "consumable_state_yellow": {
+        "name": "Estado do cartucho amarelo"
+      },
+      "consumable_state_photo_black": {
+        "name": "Estado do cartucho preto fotográfico"
+      },
+      "consumable_state_matte_black": {
+        "name": "Estado do cartucho preto fosco"
+      },
+      "consumable_state_gray": {
+        "name": "Estado do cartucho cinza"
+      },
+      "consumable_pages_remaining_black": {
+        "name": "Páginas restantes (preta)"
+      },
+      "consumable_pages_remaining_tri_color": {
+        "name": "Páginas restantes (colorida)"
+      },
+      "consumable_pages_remaining_cyan": {
+        "name": "Páginas restantes (ciano)"
+      },
+      "consumable_pages_remaining_magenta": {
+        "name": "Páginas restantes (magenta)"
+      },
+      "consumable_pages_remaining_yellow": {
+        "name": "Páginas restantes (amarela)"
+      },
+      "consumable_pages_remaining_photo_black": {
+        "name": "Páginas restantes (preta fotográfica)"
+      },
+      "consumable_pages_remaining_matte_black": {
+        "name": "Páginas restantes (preta fosca)"
+      },
+      "consumable_pages_remaining_gray": {
+        "name": "Páginas restantes (cinza)"
+      }
+    },
+    "binary_sensor": {
+      "problem": {
+        "name": "Problema"
+      },
+      "attention": {
+        "name": "Atenção"
+      },
+      "printing": {
+        "name": "Imprimindo"
+      },
+      "scanning": {
+        "name": "Digitalizando"
+      },
+      "sleeping": {
+        "name": "Em suspensão"
+      },
+      "low_ink": {
+        "name": "Tinta baixa"
+      },
+      "paper_loaded": {
+        "name": "Papel carregado"
+      },
+      "firmware_update_available": {
+        "name": "Atualização de firmware disponível"
+      },
+      "wifi_connected": {
+        "name": "Wi-Fi conectado"
+      },
+      "eprint_registered": {
+        "name": "Serviços web HP registrados"
+      },
+      "accepting_jobs": {
+        "name": "Aceitando trabalhos"
+      },
+      "calibration_required": {
+        "name": "Alinhamento necessário"
+      }
+    },
+    "switch": {
+      "quiet_mode": {
+        "name": "Modo silencioso"
+      },
+      "firmware_auto_check": {
+        "name": "Verificação automática de firmware"
+      },
+      "firmware_auto_update": {
+        "name": "Atualização automática de firmware"
+      },
+      "power_save": {
+        "name": "Economia de energia"
+      },
+      "ews": {
+        "name": "Servidor web incorporado"
+      },
+      "airprint": {
+        "name": "AirPrint"
+      },
+      "ipps": {
+        "name": "IPPS"
+      },
+      "bluetooth": {
+        "name": "Bluetooth"
+      },
+      "remote_scans": {
+        "name": "Digitalizações remotas"
+      },
+      "wifi_direct_show_passphrase": {
+        "name": "Wi-Fi Direct mostrar senha"
+      },
+      "wifi_direct_hide_ssid": {
+        "name": "Wi-Fi Direct ocultar SSID"
+      },
+      "ipp": {
+        "name": "IPP"
+      },
+      "port9100": {
+        "name": "Impressão na porta 9100"
+      },
+      "snmp": {
+        "name": "SNMP"
+      },
+      "mdns": {
+        "name": "Bonjour (mDNS)"
+      },
+      "ws_discovery": {
+        "name": "WS-Discovery"
+      },
+      "ws_print": {
+        "name": "WS-Print"
+      },
+      "ws_scan": {
+        "name": "WS-Scan"
+      },
+      "llmnr": {
+        "name": "LLMNR"
+      },
+      "webscan": {
+        "name": "Webscan"
+      }
+    },
+    "select": {
+      "power_save_timeout": {
+        "name": "Suspender após",
+        "state": {
+          "1minutes": "1 minuto",
+          "5minutes": "5 minutos",
+          "10minutes": "10 minutos",
+          "15minutes": "15 minutos",
+          "30minutes": "30 minutos",
+          "60minutes": "1 hora"
+        }
+      },
+      "auto_off_time": {
+        "name": "Desligar automaticamente após",
+        "state": {
+          "never": "Nunca",
+          "15minutes": "15 minutos",
+          "30minutes": "30 minutos",
+          "1hours": "1 hora",
+          "2hours": "2 horas",
+          "4hours": "4 horas",
+          "8hours": "8 horas"
+        }
+      },
+      "device_language": {
+        "name": "Idioma do painel"
+      },
+      "time_format": {
+        "name": "Formato da hora",
+        "state": {
+          "HR12": "12 horas",
+          "HR24": "24 horas"
+        }
+      },
+      "date_format": {
+        "name": "Formato da data",
+        "state": {
+          "MMMDDYYYY": "Mês dia ano",
+          "DDMMMYYYY": "Dia mês ano",
+          "YYYYMMMDD": "Ano mês dia"
+        }
+      },
+      "print_quality": {
+        "name": "Qualidade de impressão padrão",
+        "state": {
+          "Draft": "Rascunho",
+          "Normal": "Normal",
+          "Best": "Melhor"
+        }
+      },
+      "print_resolution": {
+        "name": "Resolução de impressão padrão",
+        "state": {
+          "fast300dpi": "300 dpi",
+          "fast600dpi": "600 dpi",
+          "fast1200dpi": "1200 dpi"
+        }
+      },
+      "copy_quality": {
+        "name": "Qualidade de cópia padrão",
+        "state": {
+          "draft": "Rascunho",
+          "normal": "Normal",
+          "best": "Melhor"
+        }
+      },
+      "copy_output_type": {
+        "name": "Cor da cópia padrão",
+        "state": {
+          "monochrome": "Preto e branco",
+          "color": "Colorida"
+        }
+      },
+      "copy_media_size": {
+        "name": "Tamanho do papel da cópia"
+      },
+      "scan_resolution": {
+        "name": "Resolução da digitalização"
+      },
+      "scan_color_mode": {
+        "name": "Cor da digitalização",
+        "state": {
+          "RGB24": "Colorido",
+          "Grayscale8": "Tons de cinza",
+          "BlackAndWhite1": "Preto e branco"
+        }
+      },
+      "scan_format": {
+        "name": "Formato da digitalização",
+        "state": {
+          "application/pdf": "PDF",
+          "image/jpeg": "JPEG"
+        }
+      },
+      "scan_source": {
+        "name": "Origem da digitalização",
+        "state": {
+          "Platen": "Vidro do scanner",
+          "Feeder": "Alimentador de documentos"
+        }
+      }
+    },
+    "number": {
+      "print_copies": {
+        "name": "Cópias padrão"
+      },
+      "job_timeout": {
+        "name": "Tempo limite do trabalho"
+      },
+      "copy_copies": {
+        "name": "Número padrão de cópias"
+      },
+      "copy_lighter_darker": {
+        "name": "Contraste da cópia"
+      }
+    },
+    "button": {
+      "identify": {
+        "name": "Localizar"
+      },
+      "scan": {
+        "name": "Digitalizar"
+      },
+      "cancel_job": {
+        "name": "Cancelar trabalho atual"
+      },
+      "check_firmware": {
+        "name": "Verificar atualização de firmware"
+      },
+      "clean_cartridges": {
+        "name": "Limpar cartuchos"
+      },
+      "align_cartridges": {
+        "name": "Alinhar cartuchos"
+      },
+      "check_internet": {
+        "name": "Testar conexão com a internet"
+      },
+      "restart": {
+        "name": "Reiniciar"
+      },
+      "print_configuration_page": {
+        "name": "Imprimir relatório de status"
+      },
+      "print_network_summary": {
+        "name": "Imprimir resumo da rede"
+      },
+      "print_quality_report": {
+        "name": "Imprimir diagnóstico de qualidade"
+      },
+      "print_wireless_test": {
+        "name": "Imprimir teste da rede sem fio"
+      }
+    },
+    "update": {
+      "firmware": {
+        "name": "Firmware"
+      }
+    },
+    "image": {
+      "last_scan": {
+        "name": "Última digitalização"
+      }
+    },
+    "text": {
+      "location": {
+        "name": "Localização"
+      },
+      "description": {
+        "name": "Descrição"
+      }
+    },
+    "event": {
+      "events": {
+        "name": "Eventos",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "alert_table_changed": "Alertas alterados",
+              "job_event": "Evento de trabalho",
+              "power_up": "Ligada",
+              "powering_down": "Desligando",
+              "scan_event": "Evento de digitalização",
+              "consumable_event": "Evento de cartucho",
+              "device_capabilities_changed": "Recursos alterados",
+              "oobe_status_changed": "Status de configuração alterado",
+              "scan_completed": "Digitalização concluída",
+              "print_job_started": "Impressão iniciada",
+              "print_job_completed": "Impressão concluída"
+            }
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "scan": {
+      "name": "Digitalizar",
+      "description": "Digitaliza um documento e salva na pasta de mídia. Retorna o caminho do arquivo.",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP a usar."
+        },
+        "resolution": {
+          "name": "Resolução",
+          "description": "Resolução em dpi. Padrão: a configurada nas opções."
+        },
+        "color_mode": {
+          "name": "Cor",
+          "description": "Colorido, tons de cinza ou preto e branco."
+        },
+        "format": {
+          "name": "Formato",
+          "description": "PDF ou JPEG."
+        },
+        "source": {
+          "name": "Origem",
+          "description": "Vidro do scanner ou alimentador de documentos."
+        },
+        "filename": {
+          "name": "Nome do arquivo",
+          "description": "Nome base do arquivo (sem extensão). Padrão: data e hora."
+        }
+      }
+    },
+    "print_file": {
+      "name": "Imprimir arquivo",
+      "description": "Imprime um arquivo de uma pasta permitida via IPP. JPEG funciona em qualquer HP; PDF só nas impressoras que o listam como formato suportado.",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP a usar."
+        },
+        "path": {
+          "name": "Caminho",
+          "description": "Caminho absoluto do arquivo (dentro de allowlist_external_dirs ou da pasta de mídia)."
+        },
+        "format": {
+          "name": "Formato do documento",
+          "description": "Tipo MIME. Deduzido da extensão quando omitido."
+        },
+        "copies": {
+          "name": "Cópias",
+          "description": "Número de cópias."
+        }
+      }
+    },
+    "print_report": {
+      "name": "Imprimir relatório",
+      "description": "Imprime uma das páginas internas da impressora (relatório de status, resumo da rede, diagnóstico de qualidade...) ou executa uma página de limpeza.",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP."
+        },
+        "page": {
+          "name": "Página",
+          "description": "Qual página interna imprimir."
+        }
+      }
+    },
+    "identify": {
+      "name": "Localizar impressora",
+      "description": "Faz o painel da impressora piscar para você encontrá-la.",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP."
+        }
+      }
+    },
+    "cancel_job": {
+      "name": "Cancelar trabalho",
+      "description": "Cancela um trabalho de impressão (o atual, se nenhum id for informado).",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP."
+        },
+        "job_id": {
+          "name": "Id do trabalho",
+          "description": "Id IPP do trabalho. Omita para cancelar o que está imprimindo."
+        }
+      }
+    },
+    "clean_cartridges": {
+      "name": "Limpar cartuchos",
+      "description": "Executa a rotina de limpeza dos cartuchos (imprime uma página).",
+      "fields": {
+        "device_id": {
+          "name": "Impressora",
+          "description": "A impressora HP."
+        },
+        "level": {
+          "name": "Nível",
+          "description": "1 = leve, 3 = profunda."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": {
+      "message": "Não foi possível alcançar a impressora em {host}: {error}"
+    },
+    "not_supported": {
+      "message": "O dispositivo em {host} não fala HP LEDM nem CDM."
+    },
+    "update_failed": {
+      "message": "Falha ao atualizar os dados da impressora: {error}"
+    },
+    "password_required": {
+      "message": "Esta configuração exige a senha de administrador da impressora. Informe-a em Reconfigurar."
+    },
+    "invalid_auth": {
+      "message": "A impressora recusou a senha de administrador."
+    },
+    "not_supported_action": {
+      "message": "Esta impressora não suporta essa ação: {error}"
+    },
+    "communication_error": {
+      "message": "Falha na comunicação com a impressora: {error}"
+    },
+    "scan_failed": {
+      "message": "Falha na digitalização: {error}"
+    },
+    "scan_in_progress": {
+      "message": "Já existe uma digitalização em andamento."
+    },
+    "no_active_job": {
+      "message": "Não há trabalho de impressão ativo para cancelar."
+    },
+    "device_not_found": {
+      "message": "Nenhuma impressora HP com o id de dispositivo {device_id}."
+    },
+    "entry_not_loaded": {
+      "message": "A impressora HP {device_id} não está carregada."
+    },
+    "no_scanner": {
+      "message": "Esta impressora não tem scanner."
+    },
+    "path_not_allowed": {
+      "message": "{path} não está dentro de uma pasta permitida."
+    },
+    "file_not_found": {
+      "message": "{path} não existe."
+    }
+  }
+}
