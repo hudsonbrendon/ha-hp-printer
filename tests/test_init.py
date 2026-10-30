@@ -74,6 +74,12 @@ async def test_entities_unavailable_then_recover(
     await setup_integration(hass, mock_config_entry)
     data = mock_client.update.return_value
     mock_client.update.side_effect = HPPrinterConnectionError("timeout")
+    # two failures are tolerated (printer busy while printing/scanning)
+    for _ in range(2):
+        freezer.tick(timedelta(seconds=31))
+        async_fire_time_changed(hass)
+        await hass.async_block_till_done()
+        assert hass.states.get("sensor.deskjet_2700_series_status").state == "sleeping"
     freezer.tick(timedelta(seconds=31))
     async_fire_time_changed(hass)
     await hass.async_block_till_done()

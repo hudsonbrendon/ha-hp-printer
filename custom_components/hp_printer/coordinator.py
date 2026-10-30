@@ -53,6 +53,7 @@ if TYPE_CHECKING:
 
 
 WRITE_SETTLE_SECONDS = 1.5
+TOLERATED_FAILURES = 2
 
 
 class ScanResult:
@@ -105,6 +106,7 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
         self.last_scan: ScanResult | None = None
         self.scanning = False
         self._poll = 0
+        self._failures = 0
         self._event_stamps: dict[str, str] = {}
         self._job_states: dict[int, str | None] = {}
 
@@ -129,7 +131,15 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
             ) from err
 
     async def _async_update_data(self) -> PrinterData:
-        """Fetch status (every poll) and static data (every N polls)."""
+        """Fetch status (every poll) and static data (every N polls).
+
+        While a scan started from Home Assistant is running the printer's HTTP
+        server is busy, so polling pauses. A couple of consecutive failures are
+        tolerated (the printer blocks LEDM for a few seconds while printing or
+        scanning) before entities go unavailable.
+        """
+        if self.scanning and self.data is not None:
+            return self.data
         full = self.data is None or self._poll % STATIC_EVERY_POLLS == 0
         try:
             data = await self.client.update(
@@ -139,6 +149,10 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
                 previous=self.data,
             )
         except HPPrinterConnectionError as err:
+            self._failures += 1
+            if self.data is not None and self._failures <= TOLERATED_FAILURES:
+                LOGGER.debug("Printer busy or unreachable (%s), keeping last data", err)
+                return self.data
             raise UpdateFailed(
                 translation_domain=DOMAIN,
                 translation_key="cannot_connect",
@@ -150,6 +164,7 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
                 translation_key="update_failed",
                 translation_placeholders={"error": str(err)},
             ) from err
+        self._failures = 0
         self._poll += 1
         self._detect_events(data)
         return data
