@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Awaitable, Callable
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -49,6 +50,9 @@ from .const import (
 
 if TYPE_CHECKING:
     from . import HPPrinterConfigEntry
+
+
+WRITE_SETTLE_SECONDS = 1.5
 
 
 class ScanResult:
@@ -232,6 +236,8 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
                 translation_key="communication_error",
                 translation_placeholders={"error": str(err)},
             ) from err
+        # the printer needs a moment before the new value shows up in reads
+        await asyncio.sleep(WRITE_SETTLE_SECONDS)
         await self.async_request_refresh()
         return result
 

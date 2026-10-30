@@ -115,6 +115,13 @@ def auto_enable_custom_integrations(enable_custom_integrations: None) -> None:
     """Enable loading custom integrations in every test."""
 
 
+@pytest.fixture(autouse=True)
+def no_write_settle() -> Generator[None]:
+    """Skip the settle delay after writes."""
+    with patch("custom_components.hp_printer.coordinator.WRITE_SETTLE_SECONDS", 0):
+        yield
+
+
 @pytest.fixture
 def printer_data() -> PrinterData:
     """Fresh PrinterData per test."""

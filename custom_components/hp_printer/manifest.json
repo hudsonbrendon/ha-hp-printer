@@ -25,7 +25,7 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/hudsonbrendon/ha-hp-printer/issues",
   "loggers": ["hp_printer", "pyipp"],
-  "requirements": ["python-hp-printer==0.1.0"],
+  "requirements": ["python-hp-printer==0.1.1"],
   "version": "0.1.0",
   "zeroconf": [
     { "type": "_ipp._tcp.local.", "properties": { "usb_mfg": "hp*" } },
