@@ -75,7 +75,7 @@
         },
         "data_description": {
           "scan_interval": "Segundos entre as consultas de status. Contadores e configurações são atualizados a cada 10 consultas.",
-          "scan_directory": "Deixe em branco para salvar em media/hp_printer/<serial>."
+          "scan_directory": "Deixe em branco para salvar em media/hp_printer/SERIAL."
         }
       }
     }

@@ -75,7 +75,7 @@
         },
         "data_description": {
           "scan_interval": "Seconds between status polls. Counters and configuration are refreshed every 10 polls.",
-          "scan_directory": "Leave empty to save scans under media/hp_printer/<serial>."
+          "scan_directory": "Leave empty to save scans under media/hp_printer/SERIAL."
         }
       }
     }
