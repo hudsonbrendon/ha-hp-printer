@@ -1,11 +1,17 @@
+<p align="center">
+  <img src="custom_components/hp_printer/brand/logo@2x.png" alt="HP Printer" height="128">
+</p>
+
 # HP Printer for Home Assistant
 
-[![HACS](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz)
-[![Release](https://img.shields.io/github/v/release/hudsonbrendon/ha-hp-printer)](https://github.com/hudsonbrendon/ha-hp-printer/releases)
 [![Tests](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/tests.yml/badge.svg)](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/tests.yml)
-[![hassfest](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/hassfest.yml/badge.svg)](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/hassfest.yml)
-
-<img src="assets/hp.png" alt="HP" width="96" align="right">
+[![Hassfest](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/hassfest.yml/badge.svg)](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/hassfest.yml)
+[![HACS](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/validate.yml/badge.svg)](https://github.com/hudsonbrendon/ha-hp-printer/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/hudsonbrendon/ha-hp-printer?sort=semver)](https://github.com/hudsonbrendon/ha-hp-printer/releases)
+[![Downloads](https://img.shields.io/github/downloads/hudsonbrendon/ha-hp-printer/total)](https://github.com/hudsonbrendon/ha-hp-printer/releases)
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026.10.0%2B-18BCF2?logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
+[![License](https://img.shields.io/github/license/hudsonbrendon/ha-hp-printer)](LICENSE)
 
 Local, cloud-free control of HP inkjet and laser printers. It talks every
 protocol the printer exposes on your LAN — **LEDM** XML, **CDM** JSON (HP+
@@ -54,6 +60,9 @@ network through `/cdm/`. Scanning needs eSCL (every HP all-in-one since
 ~2012). Entities are only created for what your printer reports.
 
 ## Installation
+
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=hudsonbrendon&repository=ha-hp-printer&category=integration)
+[![Add integration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=hp_printer)
 
 1. HACS → Integrations → ⋮ → *Custom repositories* → add
    `https://github.com/hudsonbrendon/ha-hp-printer` as *Integration*.
