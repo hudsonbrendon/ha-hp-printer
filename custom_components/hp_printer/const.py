@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from datetime import timedelta
 import logging
+import re
 from typing import Final
 
 from homeassistant.const import Platform
@@ -109,3 +111,18 @@ REPORT_BUTTONS: Final = {
 }
 
 MEDIA_SUBDIR: Final = "hp_printer"
+
+
+def option_key(value: str) -> str:
+    """Return the HA option key for a device value (``BlackAndWhite1`` -> ``black_and_white1``).
+
+    Translation keys must match ``[a-z0-9-_]+``, so device values such as
+    ``RGB24`` or ``application/pdf`` are exposed under a lowercase key.
+    """
+    snake = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", value).lower()
+    return re.sub(r"[^a-z0-9]+", "_", snake).strip("_")
+
+
+def device_value(value: str, choices: Iterable[str]) -> str:
+    """Map an option key (or a raw device value) back to the device value."""
+    return next((c for c in choices if value in (c, option_key(c))), value)

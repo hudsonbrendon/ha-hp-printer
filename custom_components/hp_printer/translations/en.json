@@ -83,42 +83,42 @@
   "selector": {
     "scan_color_mode": {
       "options": {
-        "RGB24": "Color",
-        "Grayscale8": "Grayscale",
-        "BlackAndWhite1": "Black and white"
+        "rgb24": "Color",
+        "grayscale8": "Grayscale",
+        "black_and_white1": "Black and white"
       }
     },
     "scan_format": {
       "options": {
-        "application/pdf": "PDF",
-        "image/jpeg": "JPEG"
+        "application_pdf": "PDF",
+        "image_jpeg": "JPEG"
       }
     },
     "scan_source": {
       "options": {
-        "Platen": "Flatbed glass",
-        "Feeder": "Document feeder (ADF)"
+        "platen": "Flatbed glass",
+        "feeder": "Document feeder (ADF)"
       }
     },
     "report_page": {
       "options": {
-        "configurationPage": "Printer status report",
-        "networkSummary": "Network configuration page",
-        "networkDiagnosticPage": "Network diagnostics",
-        "wirelessNetworkPage": "Wireless test report",
-        "pqDiagnosticsPage": "Print quality diagnostic",
-        "diagnosticsPage": "Diagnostics page",
-        "extendedConfigurationPage": "Extended configuration",
-        "eventLogReport": "Event log",
-        "webAccessReport": "Web access report",
-        "webServicesInfoPage": "Web services info",
-        "ePrintSetupPage": "ePrint setup page",
-        "wifiDirectGuide": "Wi-Fi Direct guide",
-        "cleaningPage": "Clean cartridges",
-        "cleaningPageLevel2": "Clean cartridges (level 2)",
-        "cleaningVerificationPage": "Cleaning verification",
-        "paperFeedCleaningPage": "Paper feed cleaning",
-        "ribSmearCleaningPage": "Smear cleaning"
+        "configuration_page": "Printer status report",
+        "network_summary": "Network configuration page",
+        "network_diagnostic_page": "Network diagnostics",
+        "wireless_network_page": "Wireless test report",
+        "pq_diagnostics_page": "Print quality diagnostic",
+        "diagnostics_page": "Diagnostics page",
+        "extended_configuration_page": "Extended configuration",
+        "event_log_report": "Event log",
+        "web_access_report": "Web access report",
+        "web_services_info_page": "Web services info",
+        "e_print_setup_page": "ePrint setup page",
+        "wifi_direct_guide": "Wi-Fi Direct guide",
+        "cleaning_page": "Clean cartridges",
+        "cleaning_page_level2": "Clean cartridges (level 2)",
+        "cleaning_verification_page": "Cleaning verification",
+        "paper_feed_cleaning_page": "Paper feed cleaning",
+        "rib_smear_cleaning_page": "Smear cleaning"
       }
     }
   },
@@ -491,24 +491,24 @@
       "time_format": {
         "name": "Time format",
         "state": {
-          "HR12": "12 hours",
-          "HR24": "24 hours"
+          "hr12": "12 hours",
+          "hr24": "24 hours"
         }
       },
       "date_format": {
         "name": "Date format",
         "state": {
-          "MMMDDYYYY": "Month day year",
-          "DDMMMYYYY": "Day month year",
-          "YYYYMMMDD": "Year month day"
+          "mmmddyyyy": "Month day year",
+          "ddmmmyyyy": "Day month year",
+          "yyyymmmdd": "Year month day"
         }
       },
       "print_quality": {
         "name": "Default print quality",
         "state": {
-          "Draft": "Draft",
-          "Normal": "Normal",
-          "Best": "Best"
+          "draft": "Draft",
+          "normal": "Normal",
+          "best": "Best"
         }
       },
       "print_resolution": {
@@ -543,23 +543,23 @@
       "scan_color_mode": {
         "name": "Scan color mode",
         "state": {
-          "RGB24": "Color",
-          "Grayscale8": "Grayscale",
-          "BlackAndWhite1": "Black and white"
+          "rgb24": "Color",
+          "grayscale8": "Grayscale",
+          "black_and_white1": "Black and white"
         }
       },
       "scan_format": {
         "name": "Scan format",
         "state": {
-          "application/pdf": "PDF",
-          "image/jpeg": "JPEG"
+          "application_pdf": "PDF",
+          "image_jpeg": "JPEG"
         }
       },
       "scan_source": {
         "name": "Scan source",
         "state": {
-          "Platen": "Flatbed glass",
-          "Feeder": "Document feeder"
+          "platen": "Flatbed glass",
+          "feeder": "Document feeder"
         }
       }
     },

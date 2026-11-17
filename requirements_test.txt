@@ -1,3 +1,4 @@
 pytest-homeassistant-custom-component==0.13.375
 ruff
-python-hp-printer==0.1.1
+# python-hp-printer is not on PyPI yet; 52b81d03d5 is the 0.1.1 commit.
+python-hp-printer @ git+https://github.com/hudsonbrendon/python-hp-printer@52b81d03d5

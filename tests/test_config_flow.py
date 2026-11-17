@@ -238,9 +238,9 @@ async def test_options_flow(
         {
             CONF_SCAN_INTERVAL: 60,
             CONF_SCAN_RESOLUTION: "600",
-            CONF_SCAN_COLOR_MODE: "Grayscale8",
-            CONF_SCAN_FORMAT: "image/jpeg",
-            CONF_SCAN_SOURCE: "Platen",
+            CONF_SCAN_COLOR_MODE: "grayscale8",
+            CONF_SCAN_FORMAT: "image_jpeg",
+            CONF_SCAN_SOURCE: "platen",
             CONF_SCAN_DIRECTORY: "",
         },
     )
@@ -248,7 +248,12 @@ async def test_options_flow(
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert mock_config_entry.options[CONF_SCAN_INTERVAL] == 60
     assert mock_config_entry.options[CONF_SCAN_RESOLUTION] == 600
-    assert mock_config_entry.options[CONF_SCAN_COLOR_MODE] == "Grayscale8"
+    assert mock_config_entry.options[CONF_SCAN_COLOR_MODE] == "grayscale8"
+    # option keys are mapped back to device values for the scanner
+    settings = mock_config_entry.runtime_data.scan_settings()
+    assert settings.color_mode == "Grayscale8"
+    assert settings.document_format == "image/jpeg"
+    assert settings.source == "Platen"
     # reopening shows the stored values
     result = await hass.config_entries.options.async_init(mock_config_entry.entry_id)
     assert result["type"] is FlowResultType.FORM

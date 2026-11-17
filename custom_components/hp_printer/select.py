@@ -25,6 +25,8 @@ from .const import (
     DEFAULT_SCAN_SOURCE,
     SCAN_COLOR_MODES,
     SCAN_FORMATS,
+    device_value,
+    option_key,
 )
 from .coordinator import HPPrinterCoordinator
 from .entity import HPPrinterEntity
@@ -40,6 +42,8 @@ class HPSelectDescription(SelectEntityDescription):
     options_fn: Callable[[PrinterData], list[str]]
     set_fn: Callable[[HPPrinter, str], Awaitable[Any]]
     exists_fn: Callable[[PrinterData], bool] = lambda _: True
+    # expose device values under lowercase option keys (translated states)
+    keyed: bool = False
 
 
 def _settings(attr: str) -> Callable[[PrinterData], str | None]:
@@ -98,6 +102,7 @@ SELECTS: tuple[HPSelectDescription, ...] = (
     HPSelectDescription(
         key="time_format",
         translation_key="time_format",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         entity_registry_enabled_default=False,
         current_fn=_settings("time_format"),
@@ -108,6 +113,7 @@ SELECTS: tuple[HPSelectDescription, ...] = (
     HPSelectDescription(
         key="date_format",
         translation_key="date_format",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         entity_registry_enabled_default=False,
         current_fn=_settings("date_format"),
@@ -118,6 +124,7 @@ SELECTS: tuple[HPSelectDescription, ...] = (
     HPSelectDescription(
         key="print_quality",
         translation_key="print_quality",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         current_fn=lambda d: d.print_config.quality if d.print_config else None,
         options_fn=lambda d: (
@@ -194,6 +201,7 @@ class HPScanOptionDescription(SelectEntityDescription):
     option_key: str
     default: str
     options_fn: Callable[[PrinterData], list[str]]
+    keyed: bool = False
 
 
 def _scan_resolutions(d: PrinterData) -> list[str]:
@@ -220,6 +228,7 @@ SCAN_SELECTS: tuple[HPScanOptionDescription, ...] = (
     HPScanOptionDescription(
         key="scan_color_mode",
         translation_key="scan_color_mode",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         option_key=CONF_SCAN_COLOR_MODE,
         default=DEFAULT_SCAN_COLOR_MODE,
@@ -234,6 +243,7 @@ SCAN_SELECTS: tuple[HPScanOptionDescription, ...] = (
     HPScanOptionDescription(
         key="scan_format",
         translation_key="scan_format",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         option_key=CONF_SCAN_FORMAT,
         default=DEFAULT_SCAN_FORMAT,
@@ -252,12 +262,20 @@ SCAN_SELECTS: tuple[HPScanOptionDescription, ...] = (
     HPScanOptionDescription(
         key="scan_source",
         translation_key="scan_source",
+        keyed=True,
         entity_category=EntityCategory.CONFIG,
         option_key=CONF_SCAN_SOURCE,
         default=DEFAULT_SCAN_SOURCE,
         options_fn=_scan_sources,
     ),
 )
+
+
+def _shown(
+    description: HPSelectDescription | HPScanOptionDescription, values: list[str]
+) -> list[str]:
+    """Option list as exposed to Home Assistant."""
+    return [option_key(v) for v in values] if description.keyed else values
 
 
 async def async_setup_entry(
@@ -290,18 +308,21 @@ class HPSelect(HPPrinterEntity, SelectEntity):
     @property
     def options(self) -> list[str]:
         """Allowed values from the printer capabilities."""
-        return self.entity_description.options_fn(self.data)
+        return _shown(self.entity_description, self.entity_description.options_fn(self.data))
 
     @property
     def current_option(self) -> str | None:
         """Current value."""
         current = self.entity_description.current_fn(self.data)
+        if current and self.entity_description.keyed:
+            current = option_key(current)
         return current if current in self.options else None
 
     async def async_select_option(self, option: str) -> None:
         """Write the new value."""
+        value = device_value(option, self.entity_description.options_fn(self.data))
         await self.coordinator.async_write(
-            lambda: self.entity_description.set_fn(self.coordinator.client, option)
+            lambda: self.entity_description.set_fn(self.coordinator.client, value)
         )
 
 
@@ -319,7 +340,7 @@ class HPScanOptionSelect(HPPrinterEntity, SelectEntity):
     @property
     def options(self) -> list[str]:
         """Allowed values from the scanner capabilities."""
-        return self.entity_description.options_fn(self.data)
+        return _shown(self.entity_description, self.entity_description.options_fn(self.data))
 
     @property
     def current_option(self) -> str | None:
@@ -328,13 +349,19 @@ class HPScanOptionSelect(HPPrinterEntity, SelectEntity):
             self.entity_description.option_key, self.entity_description.default
         )
         value = str(value)
+        if self.entity_description.keyed:
+            value = option_key(value)
         return value if value in self.options else None
 
     async def async_select_option(self, option: str) -> None:
         """Persist the default without reloading the entry."""
         entry = self.coordinator.config_entry
         key = self.entity_description.option_key
-        value: str | int = int(option) if key == CONF_SCAN_RESOLUTION else option
+        value: str | int = (
+            int(option)
+            if key == CONF_SCAN_RESOLUTION
+            else device_value(option, self.entity_description.options_fn(self.data))
+        )
         self.hass.config_entries.async_update_entry(
             entry, options={**entry.options, key: value}
         )

@@ -83,42 +83,42 @@
   "selector": {
     "scan_color_mode": {
       "options": {
-        "RGB24": "Colorido",
-        "Grayscale8": "Tons de cinza",
-        "BlackAndWhite1": "Preto e branco"
+        "rgb24": "Colorido",
+        "grayscale8": "Tons de cinza",
+        "black_and_white1": "Preto e branco"
       }
     },
     "scan_format": {
       "options": {
-        "application/pdf": "PDF",
-        "image/jpeg": "JPEG"
+        "application_pdf": "PDF",
+        "image_jpeg": "JPEG"
       }
     },
     "scan_source": {
       "options": {
-        "Platen": "Vidro do scanner",
-        "Feeder": "Alimentador de documentos (ADF)"
+        "platen": "Vidro do scanner",
+        "feeder": "Alimentador de documentos (ADF)"
       }
     },
     "report_page": {
       "options": {
-        "configurationPage": "Relatório de status da impressora",
-        "networkSummary": "Página de configuração de rede",
-        "networkDiagnosticPage": "Diagnóstico de rede",
-        "wirelessNetworkPage": "Relatório de teste da rede sem fio",
-        "pqDiagnosticsPage": "Diagnóstico de qualidade de impressão",
-        "diagnosticsPage": "Página de diagnóstico",
-        "extendedConfigurationPage": "Configuração estendida",
-        "eventLogReport": "Registro de eventos",
-        "webAccessReport": "Relatório de acesso web",
-        "webServicesInfoPage": "Informações dos serviços web",
-        "ePrintSetupPage": "Página de configuração do ePrint",
-        "wifiDirectGuide": "Guia do Wi-Fi Direct",
-        "cleaningPage": "Limpar cartuchos",
-        "cleaningPageLevel2": "Limpar cartuchos (nível 2)",
-        "cleaningVerificationPage": "Verificação da limpeza",
-        "paperFeedCleaningPage": "Limpeza da alimentação de papel",
-        "ribSmearCleaningPage": "Limpeza de manchas"
+        "configuration_page": "Relatório de status da impressora",
+        "network_summary": "Página de configuração de rede",
+        "network_diagnostic_page": "Diagnóstico de rede",
+        "wireless_network_page": "Relatório de teste da rede sem fio",
+        "pq_diagnostics_page": "Diagnóstico de qualidade de impressão",
+        "diagnostics_page": "Página de diagnóstico",
+        "extended_configuration_page": "Configuração estendida",
+        "event_log_report": "Registro de eventos",
+        "web_access_report": "Relatório de acesso web",
+        "web_services_info_page": "Informações dos serviços web",
+        "e_print_setup_page": "Página de configuração do ePrint",
+        "wifi_direct_guide": "Guia do Wi-Fi Direct",
+        "cleaning_page": "Limpar cartuchos",
+        "cleaning_page_level2": "Limpar cartuchos (nível 2)",
+        "cleaning_verification_page": "Verificação da limpeza",
+        "paper_feed_cleaning_page": "Limpeza da alimentação de papel",
+        "rib_smear_cleaning_page": "Limpeza de manchas"
       }
     }
   },
@@ -491,24 +491,24 @@
       "time_format": {
         "name": "Formato da hora",
         "state": {
-          "HR12": "12 horas",
-          "HR24": "24 horas"
+          "hr12": "12 horas",
+          "hr24": "24 horas"
         }
       },
       "date_format": {
         "name": "Formato da data",
         "state": {
-          "MMMDDYYYY": "Mês dia ano",
-          "DDMMMYYYY": "Dia mês ano",
-          "YYYYMMMDD": "Ano mês dia"
+          "mmmddyyyy": "Mês dia ano",
+          "ddmmmyyyy": "Dia mês ano",
+          "yyyymmmdd": "Ano mês dia"
         }
       },
       "print_quality": {
         "name": "Qualidade de impressão padrão",
         "state": {
-          "Draft": "Rascunho",
-          "Normal": "Normal",
-          "Best": "Melhor"
+          "draft": "Rascunho",
+          "normal": "Normal",
+          "best": "Melhor"
         }
       },
       "print_resolution": {
@@ -543,23 +543,23 @@
       "scan_color_mode": {
         "name": "Cor da digitalização",
         "state": {
-          "RGB24": "Colorido",
-          "Grayscale8": "Tons de cinza",
-          "BlackAndWhite1": "Preto e branco"
+          "rgb24": "Colorido",
+          "grayscale8": "Tons de cinza",
+          "black_and_white1": "Preto e branco"
         }
       },
       "scan_format": {
         "name": "Formato da digitalização",
         "state": {
-          "application/pdf": "PDF",
-          "image/jpeg": "JPEG"
+          "application_pdf": "PDF",
+          "image_jpeg": "JPEG"
         }
       },
       "scan_source": {
         "name": "Origem da digitalização",
         "state": {
-          "Platen": "Vidro do scanner",
-          "Feeder": "Alimentador de documentos"
+          "platen": "Vidro do scanner",
+          "feeder": "Alimentador de documentos"
         }
       }
     },

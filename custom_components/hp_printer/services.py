@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 import mimetypes
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -41,10 +42,23 @@ from .const import (
     SERVICE_PRINT_FILE,
     SERVICE_PRINT_REPORT,
     SERVICE_SCAN,
+    device_value,
 )
 
 if TYPE_CHECKING:
     from .coordinator import HPPrinterCoordinator
+
+
+
+def _choice(choices: Iterable[str]) -> vol.All:
+    """Accept a device value or its lowercase option key; return the device value."""
+    choices = tuple(choices)
+    return vol.All(
+        cv.string,
+        lambda v: device_value(v, choices),
+        vol.In(choices),
+    )
+
 
 DEVICE_SCHEMA = {vol.Required(ATTR_DEVICE_ID): cv.string}
 
@@ -54,9 +68,9 @@ SCAN_SCHEMA = vol.Schema(
         vol.Optional(ATTR_RESOLUTION): vol.All(
             vol.Coerce(int), vol.Range(min=75, max=2400)
         ),
-        vol.Optional(ATTR_COLOR_MODE): vol.In(SCAN_COLOR_MODES),
-        vol.Optional(ATTR_FORMAT): vol.In(SCAN_FORMATS),
-        vol.Optional(ATTR_SOURCE): vol.In(SCAN_SOURCES),
+        vol.Optional(ATTR_COLOR_MODE): _choice(SCAN_COLOR_MODES),
+        vol.Optional(ATTR_FORMAT): _choice(SCAN_FORMATS),
+        vol.Optional(ATTR_SOURCE): _choice(SCAN_SOURCES),
         vol.Optional(ATTR_FILENAME): cv.string,
     }
 )
@@ -71,7 +85,7 @@ PRINT_FILE_SCHEMA = vol.Schema(
     }
 )
 PRINT_REPORT_SCHEMA = vol.Schema(
-    {**DEVICE_SCHEMA, vol.Required(ATTR_PAGE): vol.In(INTERNAL_PRINT_JOBS)}
+    {**DEVICE_SCHEMA, vol.Required(ATTR_PAGE): _choice(INTERNAL_PRINT_JOBS)}
 )
 IDENTIFY_SCHEMA = vol.Schema(DEVICE_SCHEMA)
 CANCEL_JOB_SCHEMA = vol.Schema(

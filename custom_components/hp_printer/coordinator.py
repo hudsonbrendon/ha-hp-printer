@@ -43,9 +43,13 @@ from .const import (
     LEDM_EVENT_MAP,
     LOGGER,
     MEDIA_SUBDIR,
+    SCAN_COLOR_MODES,
+    SCAN_FORMATS,
+    SCAN_SOURCES,
     SIGNAL_EVENT,
     SIGNAL_SCAN_DONE,
     STATIC_EVERY_POLLS,
+    device_value,
 )
 
 if TYPE_CHECKING:
@@ -271,6 +275,13 @@ class HPPrinterCoordinator(DataUpdateCoordinator[PrinterData]):
             "source": options.get(CONF_SCAN_SOURCE, DEFAULT_SCAN_SOURCE),
         }
         values.update({k: v for k, v in overrides.items() if v is not None})
+        # options flow and service calls carry lowercase option keys
+        for field, choices in (
+            ("color_mode", SCAN_COLOR_MODES),
+            ("document_format", SCAN_FORMATS),
+            ("source", SCAN_SOURCES),
+        ):
+            values[field] = device_value(values[field], choices)
         return ScanSettings(**values)
 
     def scan_directory(self) -> Path:

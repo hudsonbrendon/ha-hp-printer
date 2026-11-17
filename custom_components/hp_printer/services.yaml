@@ -15,30 +15,30 @@ scan:
           unit_of_measurement: dpi
           mode: box
     color_mode:
-      example: RGB24
+      example: rgb24
       selector:
         select:
           translation_key: scan_color_mode
           options:
-            - RGB24
-            - Grayscale8
-            - BlackAndWhite1
+            - rgb24
+            - grayscale8
+            - black_and_white1
     format:
-      example: application/pdf
+      example: application_pdf
       selector:
         select:
           translation_key: scan_format
           options:
-            - application/pdf
-            - image/jpeg
+            - application_pdf
+            - image_jpeg
     source:
-      example: Platen
+      example: platen
       selector:
         select:
           translation_key: scan_source
           options:
-            - Platen
-            - Feeder
+            - platen
+            - feeder
     filename:
       example: contract
       selector:
@@ -77,28 +77,28 @@ print_report:
           integration: hp_printer
     page:
       required: true
-      example: networkSummary
+      example: network_summary
       selector:
         select:
           translation_key: report_page
           options:
-            - configurationPage
-            - networkSummary
-            - networkDiagnosticPage
-            - wirelessNetworkPage
-            - pqDiagnosticsPage
-            - diagnosticsPage
-            - extendedConfigurationPage
-            - eventLogReport
-            - webAccessReport
-            - webServicesInfoPage
-            - ePrintSetupPage
-            - wifiDirectGuide
-            - cleaningPage
-            - cleaningPageLevel2
-            - cleaningVerificationPage
-            - paperFeedCleaningPage
-            - ribSmearCleaningPage
+            - configuration_page
+            - network_summary
+            - network_diagnostic_page
+            - wireless_network_page
+            - pq_diagnostics_page
+            - diagnostics_page
+            - extended_configuration_page
+            - event_log_report
+            - web_access_report
+            - web_services_info_page
+            - e_print_setup_page
+            - wifi_direct_guide
+            - cleaning_page
+            - cleaning_page_level2
+            - cleaning_verification_page
+            - paper_feed_cleaning_page
+            - rib_smear_cleaning_page
 
 identify:
   fields:

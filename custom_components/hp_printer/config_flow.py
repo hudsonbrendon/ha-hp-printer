@@ -58,6 +58,7 @@ from .const import (
     SCAN_FORMATS,
     SCAN_RESOLUTIONS,
     SCAN_SOURCES,
+    option_key,
 )
 
 USER_SCHEMA = vol.Schema(
@@ -103,24 +104,28 @@ def _options_schema() -> vol.Schema:
                 )
             ),
             vol.Optional(
-                CONF_SCAN_COLOR_MODE, default=DEFAULT_SCAN_COLOR_MODE
+                CONF_SCAN_COLOR_MODE, default=option_key(DEFAULT_SCAN_COLOR_MODE)
             ): SelectSelector(
                 SelectSelectorConfig(
-                    options=list(SCAN_COLOR_MODES),
+                    options=[option_key(v) for v in SCAN_COLOR_MODES],
                     translation_key=CONF_SCAN_COLOR_MODE,
                     mode=SelectSelectorMode.DROPDOWN,
                 )
             ),
-            vol.Optional(CONF_SCAN_FORMAT, default=DEFAULT_SCAN_FORMAT): SelectSelector(
+            vol.Optional(
+                CONF_SCAN_FORMAT, default=option_key(DEFAULT_SCAN_FORMAT)
+            ): SelectSelector(
                 SelectSelectorConfig(
-                    options=list(SCAN_FORMATS),
+                    options=[option_key(v) for v in SCAN_FORMATS],
                     translation_key=CONF_SCAN_FORMAT,
                     mode=SelectSelectorMode.DROPDOWN,
                 )
             ),
-            vol.Optional(CONF_SCAN_SOURCE, default=DEFAULT_SCAN_SOURCE): SelectSelector(
+            vol.Optional(
+                CONF_SCAN_SOURCE, default=option_key(DEFAULT_SCAN_SOURCE)
+            ): SelectSelector(
                 SelectSelectorConfig(
-                    options=list(SCAN_SOURCES),
+                    options=[option_key(v) for v in SCAN_SOURCES],
                     translation_key=CONF_SCAN_SOURCE,
                     mode=SelectSelectorMode.DROPDOWN,
                 )
@@ -361,6 +366,9 @@ class HPPrinterOptionsFlow(OptionsFlowWithReload):
         current = dict(self.config_entry.options)
         if CONF_SCAN_RESOLUTION in current:
             current[CONF_SCAN_RESOLUTION] = str(current[CONF_SCAN_RESOLUTION])
+        for key in (CONF_SCAN_COLOR_MODE, CONF_SCAN_FORMAT, CONF_SCAN_SOURCE):
+            if key in current:
+                current[key] = option_key(current[key])
         return self.async_show_form(
             step_id="init",
             data_schema=self.add_suggested_values_to_schema(_options_schema(), current),

@@ -149,7 +149,7 @@ async def test_switch_select_number_text_writes(
     await hass.services.async_call(
         "select",
         "select_option",
-        {ATTR_ENTITY_ID: f"select.{P}_default_print_quality", "option": "Best"},
+        {ATTR_ENTITY_ID: f"select.{P}_default_print_quality", "option": "best"},
         blocking=True,
     )
     mock_client.set_print_config.assert_awaited_with(quality="Best")
